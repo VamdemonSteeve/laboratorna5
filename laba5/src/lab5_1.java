@@ -6,30 +6,37 @@ public class lab5_1 {
     public static void getTime(Collection<Double> ...collections) {
 
         for (Collection<Double>  elements : collections) {
+                Iterator<Double> iterator=elements.iterator();
                 long t1=System.nanoTime();
-                elements.add(6.5);
+                elements.add(10000000.0);
                 long t2=System.nanoTime();
-                elements.remove(6.5);
+                elements.remove(10000000.0);
                 long t3=System.nanoTime();
                 elements.remove(0.1);
                 long t4=System.nanoTime();
                 elements.remove(0.2);
                 long t5=System.nanoTime();
-                System.out.println(elements.getClass()+":\nadd in the end~ "+ Math.abs((t2-t1)/1000)+" microseconds\n"+"remove from the end~ "+Math.abs((t3-t2)/1000)+" microseconds\n"+"remove from the start~ "+Math.abs((t4-t3)/1000)+" microseconds \nremove from the middle~ "+Math.abs((t5-t4)/1000)+" microseconds\n---------\n");
+                System.out.println(elements.getClass()+":\nfind in the end~ "+ Math.abs((t2-t1)/1000)+" microseconds\n"+"remove from the end~ "+Math.abs((t3-t2)/1000)+" microseconds\n"+"remove from the start~ "+Math.abs((t4-t3)/1000)+" microseconds \nremove from the middle~ "+Math.abs((t5-t4)/1000)+" microseconds\n---------\n");
         }
     }
-    public static void TimeAddList(List<Double> arraylist,List<Double> linkedList)
+    public static void TimeAddList(List<Double> arraylist,List<Double> linkedList,Set<Double> treeset)
     {
-        long t1=System.nanoTime();
         arraylist.add(799900/2,1.1);
-        long t2=System.nanoTime();
         linkedList.add(799900/2,1.1);
-        long t3=System.nanoTime();
+        treeset.add(799900.0/2);
+        treeset.add(0.0);
         arraylist.add(0,1.1);
-        long t4=System.nanoTime();
         linkedList.add(0,1.1);
+        long t1=System.nanoTime();
+        arraylist.get(799900/2);
+        long t2=System.nanoTime();
+        linkedList.get(799900/2);
+        long t3=System.nanoTime();
+        arraylist.get(0);
+        long t4=System.nanoTime();
+        linkedList.get(0);
         long t5=System.nanoTime();
-        System.out.println("ArrayList:\nadd in the middle ~ "+Math.abs((t2-t1)/1000)+" microseconds\nadd at the start~ "+Math.abs((t4-t3)/1000)+" microseconds\nLinkedList:\nadd in the middle~ "+Math.abs((t3-t2)/1000)+" microseconds\nadd at the start~ "+Math.abs((t5-t4)/1000));
+        System.out.println("ArrayList:\nfind in the middle ~ "+Math.abs((t2-t1)/1000)+" microseconds\nfind at the start~ "+Math.abs((t4-t3)/1000)+" microseconds\nLinkedList:\nfind in the middle~ "+Math.abs((t3-t2)/1000)+" microseconds\nfind at the start~ "+Math.abs((t5-t4)/1000)+" microseconds");
     }
     public static void main(String args[]) throws IOException
     {
@@ -60,21 +67,20 @@ public class lab5_1 {
         {
             treeset.add(new Double(i));
         }
-        long t5=System.currentTimeMillis();
-        System.out.println("ArrayList initialization= "+Math.abs((t2-t1)/1000)+" microseconds\nLinkedList initialization= "+Math.abs((t3-t2)/1000)+" microseconds\nHashSet= "+Math.abs((t4-t3)/1000)+" microseconds\nTreeSet initialization= "+Math.abs((t5-t4)/1000));
+        long t5=System.nanoTime();
+        System.out.println("ArrayList initialization= "+Math.abs((t2-t1)/1000)+" microseconds\nLinkedList initialization= "+Math.abs((t3-t2)/1000)+" microseconds\nHashSet= "+Math.abs((t4-t3)/1000)+" microseconds\nTreeSet initialization= "+Math.abs((t5-t4)/1000)+" microseconds\n");
         arraylist.set(0,11111.1);
         arraylist.set(799900/2,80000.1);
         linkedlist.set(0,11111.1);
         linkedlist.set(799900/2,80000.1);
-        hashset.add(11111.1);
-        hashset.add(80000.1);
+        hashset.add(0.2);
         //treeset.add(0.1);
-        treeset.add(11111.1);
+        treeset.add(0.2);
         treeset.add(80000.1);
         //for(Number element : treeset)
             //System.out.println(element);
         getTime(arraylist,linkedlist,treeset,hashset);
-        TimeAddList(arraylist,linkedlist);
+        TimeAddList(arraylist,linkedlist,treeset);
         System.out.println("TASK2:");
         lab5_2 Task2=new lab5_2();
         System.out.println("TASK3:");
